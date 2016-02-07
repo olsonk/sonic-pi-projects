@@ -1,0 +1,62 @@
+with_fx :reverb, room: 1 do
+  with_fx :echo do
+    with_synth :hollow do
+      live_loop :spooky do
+        play rrand(50, 70), cutoff: rrand(70, 100), amp: rrand(1, 2.5)
+        sleep rrand(0.75, 1.5)
+      end
+    end
+  end
+end
+
+with_fx :flanger do
+  with_synth :growl do
+    use_synth_defaults amp: 0.5
+    live_loop :feedback do
+      play rrand(61, 65), sustain: rrand(1, 5)
+      sleep rrand(0.5, 2)
+    end
+  end
+end
+
+with_fx :distortion do
+  with_fx :ixi_techno, phase: 1 do
+    live_loop :static do
+      sample :sn_dub, amp: 2, rate: rrand(0.05, 0.2)
+      sleep rrand(1, 10)
+    end
+  end
+end
+
+with_fx :reverb, room: 0.5 do
+  with_fx :echo, phase: 1, decay: 10 do
+    live_loop :footsteps, pan: rrand(-1, 1) do
+      sample :elec_plip, amp: 2
+      sleep 1
+      sample :elec_plip, amp: 3
+      sleep 1
+      sample :elec_plip, amp: 4
+      sleep 1
+      sample :elec_plip, amp: 5
+      sleep 1
+      sample :elec_plip, amp: 6
+      sleep 1
+      sample :elec_plip, amp: 7
+      sleep rrand(1.5, 7)
+    end
+  end
+end
+
+with_synth :growl do
+  with_fx :rbpf, mix: 0.8 do
+    with_fx :echo, phase: 0.5 do
+      with_fx :reverb, room: 0.9 do
+        live_loop :organ do
+          play scale(:E5, :minor).choose, amp: 10
+          play scale(:E2, :minor).choose, amp: 10
+          sleep 1
+        end
+      end
+    end
+  end
+end
