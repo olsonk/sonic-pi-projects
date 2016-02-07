@@ -1,0 +1,120 @@
+use_bpm 50
+use_synth :hollow
+
+live_loop :synth do
+  sample :drum_cymbal_open, amp: 0.5
+  sample :drum_bass_hard
+  sleep 0.25
+  sample :drum_cymbal_open, amp: 0.5
+  sleep 0.25
+  sample :drum_cymbal_open, amp: 0.5
+  sample :drum_snare_hard
+  sleep 0.25
+  sample :drum_cymbal_open, amp: 0.5
+  sleep 0.25
+  sample :drum_cymbal_open, amp: 0.5
+  sample :drum_bass_hard
+  sleep 0.25
+  sample :drum_cymbal_open, amp: 0.5
+  sample :drum_bass_hard
+  sleep 0.25
+  sample :drum_cymbal_open, amp: 0.5
+  sample :drum_snare_hard
+  sleep 0.25
+  sample :drum_cymbal_open, amp: 0.5
+  sleep 0.25
+end
+
+
+live_loop :guitar do
+  sleep 8
+  with_fx :distortion, distort: 0.85 do
+    use_synth :saw
+    use_synth_defaults release: 1.25
+    4.times do
+      guitar_intro
+    end
+    4.times do
+      guitar_verse
+    end
+  end
+end
+
+define :guitar_intro do
+  play :c4
+  play :f2, release: 1
+  sleep 0.25
+  play :f4
+  sleep 0.25
+  play :a4
+  sleep 0.25
+  play :e5
+  sleep 0.25
+  play :b4
+  sleep 0.25
+  play :a4
+  sleep 0.25
+  play :f4
+  sleep 0.25
+  play :a3
+  sleep 0.25
+  play :a2
+  play :c4
+  play :e4
+  play :a4
+  sleep 0.75
+  play :b2
+  play :d4
+  play :f4
+  play :a4
+  sleep 1.25
+end
+
+define :guitar_verse do
+  play :c4
+  play :f3
+  play :a4
+  sleep 0.5
+  play :c4
+  play :f3
+  play :a4
+  sleep 0.25
+  play :d3
+  play :e4
+  play :d4
+  play :g4
+  sleep 0.25
+  play :c4
+  play :f3
+  play :a4
+  sleep 0.5
+  play :f4
+  play :d4
+  play :g4
+  sleep 0.25
+  play :e4
+  play :d4
+  play :g4
+  sleep 0.25
+  play :c4
+  play :e4
+  play :a4
+  sleep 0.25
+  play :c4
+  play :e4
+  play :a4
+  sleep 0.25
+  play :c4
+  play :e4
+  play :a4
+  sleep 0.25
+  play :d4
+  play :f4
+  play :a4
+  sleep 0.25
+  sleep 0.75
+  play :d4
+  play :f4
+  play :a4
+  sleep 0.25
+end
