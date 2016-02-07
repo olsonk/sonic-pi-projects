@@ -1,0 +1,133 @@
+# Welcome to Sonic Pi v2.7
+# Never Ending Circles, by Chvrches
+
+define :intro do
+  2.times do
+    3.times do
+      with_fx :reverb, room: 0.9 do
+        with_synth :dsaw do
+          play :F2, amp: 2.5
+          play :F1, amp: 2.5
+        end
+      end
+      play :F4
+      sleep 0.875
+      play :C6
+      play :C5
+      sleep 0.0625
+      play :G4
+      sleep 0.0625
+    end
+    play :A4
+    play :A2
+    sleep 1
+  end
+  2.times do
+    3.times do
+      with_fx :reverb, room: 0.9 do
+        with_synth :prophet do
+          play :As1, amp: 2.5
+        end
+      end
+      play :As3
+      sleep 0.875
+      play :C6
+      sleep 0.0625
+      play :G4
+      sleep 0.0625
+    end
+    play :F4
+    play :F2
+    sleep 1
+  end
+end
+
+define :leadin do
+  with_fx :echo, phase: 1, decay: 12 do
+    1.times do
+      play :C6
+      sleep 0.25
+      play :F5
+      sleep 0.25
+      play :G5
+      sleep 1.5
+    end
+    sleep 6
+    1.times do
+      play :C6
+      sleep 0.25
+      play :G5
+      sleep 0.25
+      play :C5
+      sleep 1.5
+    end
+    sleep 6
+  end
+end
+
+define :chorus do
+  play :F4, sustain: 8
+  play :Bb4, sustain: 8
+  sleep 8
+  play :As3, sustain: 8
+  play :F4, sustain: 8
+  sleep 8
+end
+
+use_bpm 90
+
+live_loop :melody do
+  with_fx :bitcrusher, bits: 8 do
+    with_fx :reverb do
+      use_synth :saw
+      use_synth_defaults attack: 0, duration: 0, sustain: 0.1, release: 0.4
+      2.times do
+        intro
+      end
+      #lead-in
+      2.times do
+        leadin
+      end
+      #chorus
+      2.times do
+        chorus
+      end
+      1.times do
+        intro
+      end
+      2.times do
+        leadin
+      end
+      2.times do
+        chorus
+      end
+    end
+  end
+end
+
+with_fx :distortion, distort: 0.6 do
+  with_fx :reverb, room: 0.6 do
+    live_loop :bassdrum do
+      3.times do
+        3.times do
+          sample :drum_bass_hard, amp: 3
+          sleep 0.5
+          sample :drum_cymbal_open, start: 0.2, finish: 0.4
+          sleep 0.5
+        end
+        sample :sn_dolf
+        sleep 1
+      end
+      3.times do
+        sample :drum_bass_hard, amp: 3
+        sleep 0.5
+        sample :drum_cymbal_open, start: 0.2, finish: 0.4
+        sleep 0.5
+      end
+      4.times do
+        sample :sn_dolf
+        sleep 0.25
+      end
+    end
+  end
+end
