@@ -1,4 +1,5 @@
-use_bpm 75
+use_debug false
+use_bpm 90
 
 cnotes = (ring "c", "d", "e", "g")
 anotes = (ring "a", "b", "c", "e")
@@ -19,7 +20,8 @@ asoct = (ring 2, 3, 3, 3, 3, 4, 4, 5, 4, 5, 5, 6, 5, 6, 6, 7)
 octaves = (ring coct, aoct, coct, aoct, foct, foct, gsoct, gsoct)
 
 with_fx :reverb do
-  live_loop :melody do
+  live_loop :arp do
+    use_synth :tri
     tick(:notes)
     16.times do
       play note(notes.look(:notes).tick(:forward), octave: octaves.look(:notes).look(:forward))
@@ -33,4 +35,86 @@ with_fx :reverb do
     end
     tick(:rev)
   end
+end
+
+live_loop :keyboard, delay: 64 do
+  use_synth :hollow
+  use_synth_defaults amp: 10
+  play (chord :c4, :major), sustain: 6
+  play 72, sustain: 4
+  sleep 4
+  play (chord :e, :minor), sustain: 2.25, amp: 10
+  sleep 2
+  play (chord :g, :major), sustain: 2.25, amp: 10
+  sleep 2
+  play (chord :c4, :major), sustain: 6
+  play 72, sustain: 6
+  sleep 4
+  play :E5, sustain: 1.25
+  sleep 1
+  play :D5, sustain: 1.25
+  sleep 1
+  play :C5, sustain: 1.25
+  sleep 1
+  play :D5, sustain: 1.25
+  sleep 1
+  play (chord :c4, :major), sustain: 6
+  play 72, sustain: 4
+  sleep 4
+  play (chord :e, :minor), sustain: 2.25
+  sleep 2
+  play (chord :g, :major), sustain: 2.25
+  sleep 2
+  play (chord :g, :major), sustain: 1
+  sleep 0.5
+  play (chord :g, :major), sustain: 1.5
+  play :e6, sustain: 1.5
+  sleep 0.5
+  play (chord :c4, :major), sustain: 3.25
+  play 72, sustain: 3.25
+  sleep 3
+  play :a3, sustain: 1.5
+  play :c4, sustain: 1.5
+  sleep 1
+  play :b3, sustain: 1.5
+  play :d4, sustain: 1.5
+  sleep 1
+  play :c4, sustain: 1.5
+  play :e4, sustain: 1.5
+  sleep 1
+  play :e4, sustain: 1.5
+  play :g4, sustain: 1.5
+  sleep 1
+  play :f4, sustain: 6
+  play :a4, sustain: 6
+  sleep 4
+  play :a4, sustain: 2.25
+  play :c5, sustain: 2.25
+  play :g5, sustain: 2.25
+  sleep 2
+  play :a4, sustain: 2.25
+  play :c5, sustain: 2.25
+  play :f5, sustain: 2.25
+  sleep 2
+  play :a4, sustain: 8
+  play :c4, sustain: 8
+  play :g4, sustain: 8
+  play :b5, sustain: 9
+  sleep 8
+  play :f6, sustain: 1.5
+  sleep 1
+  play :eb6, sustain: 1
+  sleep 0.5
+  play :d6, sustain: 1
+  sleep 0.5
+  play :c6, sustain: 7
+  sleep 6
+  play :g6, sustain: 1.5
+  sleep 1
+  play :f6, sustain: 1
+  sleep 0.5
+  play :eb6, sustain: 1
+  sleep 0.5
+  play :d6, sustain: 6.25
+  sleep 6
 end
